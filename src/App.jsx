@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { fetchCatImages } from "./api";
 import CatCard from "./CatCard";
 import "./App.css";
@@ -64,11 +66,25 @@ export default function App() {
 
         {hasMoreCats && (
           <div className="buttons">
-            <button className="dislike-btn" onClick={() => handleSwipe("dislike")}>
-              ❌ Dislike
+            {/* Dislike Button */}
+            <button
+              className="dislike-btn"
+              onClick={() => handleSwipe("dislike")}
+            >
+              <FontAwesomeIcon
+                icon={faXmark}
+                style={{ color: "#fff", fontSize: 20, marginRight: "8px" }}
+              />
+              Dislike
             </button>
+
+            {/* Like Button */}
             <button className="like-btn" onClick={() => handleSwipe("like")}>
-              ❤️ Like
+              <FontAwesomeIcon
+                icon={faHeart}
+                style={{ color: "#fff", fontSize: 20, marginRight: "8px" }}
+              />
+              Like
             </button>
           </div>
         )}

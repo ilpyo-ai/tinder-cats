@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
+// ganti 'tinder-cats' dengan nama repo GitHub
 export default defineConfig({
   plugins: [react()],
+  base: '/tinder-cats/'
 })
