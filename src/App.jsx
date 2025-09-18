@@ -110,7 +110,9 @@ export default function App() {
                 alt="Loading cats..."
                 className="loading-gif"
               />
-              <p style={{ fontSize: "17px", fontWeight: "bold", color: "#000" }}>
+              <p
+                style={{ fontSize: "17px", fontWeight: "bold", color: "#000" }}
+              >
                 Loading cutest meowws for you...
               </p>
             </div>
@@ -130,8 +132,21 @@ export default function App() {
 
                 {!hasMoreCats && (
                   <div className="finished">
-                    <h2>All cats viewed! 😺</h2>
-                    <p>You liked {likedCats.length} cats.</p>
+                    <div style={{ textAlign: "center", lineHeight: "1.3" }}>
+                      <h2 style={{ margin: "10px 0" }}>Here is your Meows! 😺</h2>
+                      <p style={{ margin: "4px 0" }}>
+                        You liked {likedCats.length} meows.
+                      </p>
+                      <p
+                        style={{
+                          fontSize: "14px",
+                          color: "#666",
+                          margin: "2px 0",
+                        }}
+                      >
+                        (You can click your meows.)
+                      </p>
+                    </div>
 
                     {/* Liked cats thumbnails */}
                     <div className="liked-cats-grid">
@@ -207,7 +222,7 @@ export default function App() {
             className="tutorial-btn-floating"
             onClick={() => setShowTutorial(true)}
           >
-            Tutorial
+            Tutorial ?
           </button>
         )}
 

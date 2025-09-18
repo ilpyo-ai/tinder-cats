@@ -1,4 +1,4 @@
-const CAT_COUNT = 5;
+const CAT_COUNT = 15;
 
 export const fetchCatImages = async () => {
   try {

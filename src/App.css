@@ -183,6 +183,7 @@ body::before {
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.3s ease;
+  margin-top: 20px;
 }
 
 .restart-btn:hover {
@@ -316,24 +317,38 @@ body::before {
 }
 
 .liked-cats-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  gap: 8px; /* spacing between images */
+  justify-items: center; /* center each image in its grid cell */
+  padding: 10px;
+  max-width: 100%;
 }
 
 .liked-cat {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
 .liked-cat:hover {
   transform: scale(1.1);
+}
+
+/* optional: for mobile you can limit the columns to fit nicely */
+@media (max-width: 480px) {
+  .liked-cats-grid {
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 6px;
+  }
+
+  .liked-cat {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 /* Modal overlay */
