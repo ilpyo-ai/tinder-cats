@@ -1,10 +1,13 @@
 html,
 body,
 #root {
-  margin: 0;
-  padding: 0;
   height: 100%;
   width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* disables scrolling */
+  touch-action: none; /* prevents touch scrolling on mobile */
+  -webkit-overflow-scrolling: none; /* for iOS */
 }
 
 /* 🔹 Stack header on top, content below */
