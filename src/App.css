@@ -1,0 +1,112 @@
+/* FULL SCREEN CENTERING */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+
+.app-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; /* Space between cards & buttons */
+}
+
+.card-stack {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cat-card-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  z-index: 10;
+}
+
+.cat-card-container:active {
+  cursor: grabbing;
+}
+
+.cat-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.dislike-btn,
+.like-btn,
+.restart-btn {
+  font-size: 18px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dislike-btn {
+  background: #ff4d4d;
+  color: white;
+}
+
+.like-btn {
+  background: #4caf50;
+  color: white;
+}
+
+.restart-btn {
+  background: #007bff;
+  color: white;
+}
+
+.loading {
+  font-size: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.finished {
+  text-align: center;
+}
