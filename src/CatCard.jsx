@@ -3,40 +3,49 @@ import { motion, useMotionValue, useTransform } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faXmark } from "@fortawesome/free-solid-svg-icons";
 
-export default function CatCard({ cat, onSwipe, isVisible, zIndex }) {
+export default function CatCard({ cat, onSwipe, onDragMove, isVisible, zIndex }) {
   const [isDragging, setIsDragging] = useState(false);
 
-  // Track drag position
   const x = useMotionValue(0);
 
-  // Rotate ikut kiri/kanan (macam pokok bergoyang)
   const rotate = useTransform(x, [-150, 0, 150], [-15, 0, 15]);
 
-  // Untuk control opacity circle + icon
-  const likeOpacity = useTransform(x, [0, 100], [0, 1]);
-  const dislikeOpacity = useTransform(x, [-100, 0], [1, 0]);
+  const likeOpacity = useTransform(x, [0, 50], [0, 1]);
+  const dislikeOpacity = useTransform(x, [-50, 0], [1, 0]);
+
+  const threshold = 100;
+
+  const handleDrag = (event, info) => {
+    if (info.offset.x > 20) {
+      onDragMove("like"); // Dragging to the right
+    } else if (info.offset.x < -20) {
+      onDragMove("dislike"); // Dragging to the left
+    } else {
+      onDragMove(null); // Back to center
+    }
+  };
 
   const handleDragEnd = (event, info) => {
-    const threshold = 100;
-
     if (info.offset.x > threshold) {
-      onSwipe("like"); // Swipe kanan = Like
+      onSwipe("like");
     } else if (info.offset.x < -threshold) {
-      onSwipe("dislike"); // Swipe kiri = Dislike
-    } else {
-      setIsDragging(false); // Balik tengah
+      onSwipe("dislike");
     }
+
+    setIsDragging(false);
+    onDragMove(null); // Reset state after swipe
   };
 
   return (
     <motion.div
       className="cat-card-container"
       drag="x"
-      dragConstraints={{ left: 0, right: 0 }}
+      dragConstraints={{ left: -30, right: 30 }}
+      dragElastic={0.1}
       style={{
         x,
         rotate,
-        transformOrigin: "bottom center", // bawah still stay
+        transformOrigin: "bottom center",
         position: "absolute",
         width: "300px",
         height: "400px",
@@ -51,6 +60,7 @@ export default function CatCard({ cat, onSwipe, isVisible, zIndex }) {
         zIndex: zIndex,
       }}
       onDragStart={() => setIsDragging(true)}
+      onDrag={handleDrag}
       onDragEnd={handleDragEnd}
       whileTap={{ cursor: "grabbing" }}
       animate={{
@@ -59,7 +69,7 @@ export default function CatCard({ cat, onSwipe, isVisible, zIndex }) {
       }}
       transition={{ duration: 0.2 }}
     >
-      {/* LIKE (Green Circle + Heart) */}
+      {/* LIKE Indicator */}
       <motion.div
         style={{
           position: "absolute",
@@ -68,7 +78,7 @@ export default function CatCard({ cat, onSwipe, isVisible, zIndex }) {
           width: 60,
           height: 60,
           borderRadius: "50%",
-          background: "rgba(76, 175, 80, 0.85)", // Green circle
+          background: "rgba(76, 175, 80, 0.85)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -81,13 +91,13 @@ export default function CatCard({ cat, onSwipe, isVisible, zIndex }) {
         <FontAwesomeIcon
           icon={faHeart}
           style={{
-            color: "white", // Tukar ke #000 kalau nak hitam
+            color: "white",
             fontSize: 28,
           }}
         />
       </motion.div>
 
-      {/* DISLIKE (Red Circle + X) */}
+      {/* DISLIKE Indicator */}
       <motion.div
         style={{
           position: "absolute",
@@ -96,7 +106,7 @@ export default function CatCard({ cat, onSwipe, isVisible, zIndex }) {
           width: 60,
           height: 60,
           borderRadius: "50%",
-          background: "rgba(255, 77, 77, 0.85)", // Red circle
+          background: "rgba(255, 77, 77, 0.85)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -109,7 +119,7 @@ export default function CatCard({ cat, onSwipe, isVisible, zIndex }) {
         <FontAwesomeIcon
           icon={faXmark}
           style={{
-            color: "white", // Tukar ke #000 kalau nak hitam
+            color: "white",
             fontSize: 28,
           }}
         />

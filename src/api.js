@@ -2,15 +2,16 @@ const CAT_COUNT = 5;
 
 export const fetchCatImages = async () => {
   try {
-    const response = await fetch(`https://cataas.com/api/cats?limit=${CAT_COUNT}`);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const data = await response.json();
-    // Convert API data to full image URLs
-    return data.map(cat => `https://cataas.com/cat/${cat.id}`);
+    const images = await Promise.all(
+      Array.from({ length: CAT_COUNT }).map(() => {
+        const uniqueParam = Date.now() + Math.random(); // unique for every request
+        return fetch(`https://cataas.com/cat?random=true&unique=${uniqueParam}`)
+          .then(res => res.url);
+      })
+    );
+    return images;
   } catch (error) {
-    console.error("Failed to fetch cat images:", error);
+    console.error("Failed to fetch random cats:", error);
     return [];
   }
 };
