@@ -338,7 +338,6 @@ body::before {
   transform: scale(1.1);
 }
 
-/* optional: for mobile you can limit the columns to fit nicely */
 @media (max-width: 480px) {
   .liked-cats-grid {
     grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
@@ -351,7 +350,6 @@ body::before {
   }
 }
 
-/* Modal overlay */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -364,7 +362,7 @@ body::before {
 }
 
 .modal-cat {
-  width: 300px; /* same as card */
+  width: 300px;
   height: 400px;
   object-fit: cover;
   border-radius: 15px;

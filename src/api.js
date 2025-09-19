@@ -4,7 +4,7 @@ export const fetchCatImages = async () => {
   try {
     const images = await Promise.all(
       Array.from({ length: CAT_COUNT }).map(() => {
-        const uniqueParam = Date.now() + Math.random(); // unique for every request
+        const uniqueParam = Date.now() + Math.random(); 
         return fetch(`https://cataas.com/cat?random=true&unique=${uniqueParam}`)
           .then(res => res.url);
       })

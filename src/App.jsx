@@ -12,13 +12,10 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeButton, setActiveButton] = useState(null);
 
-  // Tutorial overlay state
   const [showTutorial, setShowTutorial] = useState(null);
 
-  // Modal for liked cats
   const [modalCat, setModalCat] = useState(null);
 
-  // Check if tutorial was seen
   useEffect(() => {
     const tutorialSeen = localStorage.getItem("tutorialSeen");
     setShowTutorial(!tutorialSeen);
@@ -29,13 +26,11 @@ export default function App() {
     localStorage.setItem("tutorialSeen", "true");
   };
 
-  // Fetch and preload cats
   useEffect(() => {
     const loadCats = async () => {
       setIsLoading(true);
       const images = await fetchCatImages();
 
-      // Preload images
       await Promise.all(
         images.map(
           (url) =>
